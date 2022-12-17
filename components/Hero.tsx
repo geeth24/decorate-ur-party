@@ -3,7 +3,7 @@ import {
     Overlay,
     Container,
     Title,
-    Button,
+    Image,
     Text,
 } from "@mantine/core"
 import { motion } from "framer-motion"
@@ -78,6 +78,19 @@ function Hero() {
                 zIndex={0}
             />
             <Container className={classes.container}>
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: 0.5 }}
+                >
+                    <Image
+                        src="/frame.png"
+                        alt="Decorate Ur Party Frame"
+                        width={250}
+                        height={250}
+                        mb="md"
+                    />
+                </motion.div>
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}

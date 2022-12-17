@@ -10,8 +10,8 @@ export default class _Document extends Document {
         return (
             <Html>
                 <Head>
-                    <link rel="icon" href="/DUPLogo.png" />
-                    <link rel="apple-touch-icon" href="/DUPLogo.png" />
+                    <link rel="icon" href="/frame.png" />
+                    <link rel="apple-touch-icon" href="/frame.png" />
                     <meta property="og:title" content="Decorate Ur Party" />
                     <meta
                         name="image"
