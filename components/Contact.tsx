@@ -6,8 +6,10 @@ import {
     Stack,
     Container,
     Title,
+    Group,
 } from "@mantine/core"
 import { IconPhone, IconAt, IconBrandInstagram } from "@tabler/icons"
+import { motion } from "framer-motion"
 type ContactIconVariant = "white" | "gradient"
 
 interface Contacttyles {
@@ -156,33 +158,48 @@ function Contact() {
                 }}
                 id="contact"
             >
-                <Title
-                    sx={(theme) => ({
-                        fontFamily: `Greycliff CF, ${theme.fontFamily}`,
-                        textAlign: "center",
-                        fontWeight: 900,
-                        fontSize: 38,
-                        marginBottom: theme.spacing.xl * 1.5,
-
-                        [theme.fn.smallerThan("sm")]: {
-                            fontSize: 32,
-                        },
-                    })}
+                {" "}
+                <Group position="center">
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        whileInView={{ opacity: 1 }}
+                        transition={{ duration: 0.5 }}
+                        viewport={{ once: true, amount: 0.8 }}
+                    >
+                        <Text
+                            size={50}
+                            weight={700}
+                            color="pink"
+                            sx={{
+                                fontFamily: "Alex Brush",
+                            }}
+                        >
+                            Contact
+                        </Text>
+                    </motion.div>
+                </Group>
+                <motion.div
+                    initial={{ y: 50, opacity: 0 }}
+                    whileInView={{ y: 0, opacity: 1 }}
+                    transition={{
+                        delay: 0.1,
+                        duration: 0.5,
+                    }}
+                    viewport={{ once: true, amount: 0.8 }}
                 >
-                    Contact Us
-                </Title>
-                <Box
-                    sx={(theme) => ({
-                        padding: theme.spacing.xl,
-                        borderRadius: theme.radius.md,
-                        backgroundColor:
-                            theme.colorScheme === "dark"
-                                ? theme.colors.pink[9]
-                                : theme.colors.pink[2],
-                    })}
-                >
-                    <ContactList />
-                </Box>
+                    <Box
+                        sx={(theme) => ({
+                            padding: theme.spacing.xl,
+                            borderRadius: theme.radius.md,
+                            backgroundColor:
+                                theme.colorScheme === "dark"
+                                    ? theme.colors.pink[9]
+                                    : theme.colors.pink[2],
+                        })}
+                    >
+                        <ContactList />
+                    </Box>
+                </motion.div>
             </Container>
         </>
     )
