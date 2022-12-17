@@ -7,13 +7,7 @@ import {
     Container,
     Title,
 } from "@mantine/core"
-import {
-    IconPhone,
-    IconMapPin,
-    IconAt,
-    IconBrandInstagram,
-} from "@tabler/icons"
-import Head from "next/head"
+import { IconPhone, IconAt, IconBrandInstagram } from "@tabler/icons"
 type ContactIconVariant = "white" | "gradient"
 
 interface Contacttyles {
@@ -153,9 +147,6 @@ function ContactList({ data = MOCKDATA, variant }: ContactListProps) {
 function Contact() {
     return (
         <>
-            <Head>
-                <title>Contact Us | Pista Express</title>
-            </Head>
             <Container
                 size="lg"
                 pt={80}
@@ -163,6 +154,7 @@ function Contact() {
                 sx={{
                     maxWidth: 700,
                 }}
+                id="contact"
             >
                 <Title
                     sx={(theme) => ({

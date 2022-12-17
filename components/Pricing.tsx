@@ -155,10 +155,34 @@ function Pricing() {
                                 Contact for Pricing
                             </Text>
                             <Text size="sm" color="dimmed" mt="sm">
-                                Please contact me for pricing for your event. As
-                                every event is different, I will provide a
-                                custom quote for you.
+                                "Lorem ipsum dolor sit amet, consectetur
+                                adipiscing elit, sed do eiusmod tempor
+                                incididunt ut labore et dolore magna aliqua. Ut
+                                enim ad minim veniam, quis nostrud exercitation
+                                ullamco laboris nisi ut aliquip ex ea commodo
+                                consequat. Duis aute irure dolor in
+                                reprehenderit in voluptate velit esse cillum
+                                dolore eu fugiat nulla pariatur. Excepteur sint
+                                occaecat cupidatat non proident, sunt in culpa
+                                qui officia deserunt mollit anim id est
+                                laborum."
                             </Text>
+                            <Button
+                                mt="xl"
+                                variant="outline"
+                                color="pink"
+                                onClick={() => {
+                                    //scroll to contact
+                                    const contact =
+                                        document.getElementById("contact")
+                                    // @ts-ignore
+                                    contact.scrollIntoView({
+                                        behavior: "smooth",
+                                    })
+                                }}
+                            >
+                                Contact me
+                            </Button>
                         </Card>
                     </motion.div>
                 </SimpleGrid>
