@@ -36,7 +36,7 @@ function Hero() {
   return (
     <div className="relative flex h-[calc(100vh-64px)] w-full flex-col items-center justify-center px-10 py-2">
       <Image
-        src="/hero-bg.jpg"
+        src="/hero-bg.webp"
         alt="hero"
         layout="fill"
         objectFit="cover"
