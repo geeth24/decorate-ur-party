@@ -34,7 +34,7 @@ function Hero() {
   };
 
   return (
-    <div className="relative flex h-[calc(100vh-64px)] w-full flex-col items-center justify-center px-10 py-2">
+    <div className="relative flex h-[calc(100vh-64px)] w-full flex-col items-center justify-center px-4 sm:px-6 lg:px-8">
       <Image
         src="/hero-bg.webp"
         alt="hero"
@@ -47,10 +47,11 @@ function Hero() {
         <div className="h-full w-full" />
       </AuroraBackground>
       <motion.div
-        className="z-20  flex w-full items-start gap-4"
+        className="z-20 flex w-full max-w-7xl items-start gap-4"
         variants={containerVariants}
         initial="hidden"
-        animate="visible"
+        whileInView="visible"
+        viewport={{ once: true }}
       >
         <div className="flex max-w-3xl flex-col text-left">
           <motion.h1
