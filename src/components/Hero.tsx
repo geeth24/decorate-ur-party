@@ -73,12 +73,12 @@ function Hero() {
             className="mt-4 flex rounded-md bg-primary/50 p-4 backdrop-blur-xl"
             variants={itemVariants}
           >
-            <div className="flex w-full items-center justify-between gap-4">
-              <div className="flex items-center gap-2">
+            <div className="flex w-full flex-col items-center justify-between gap-4 md:flex-row">
+              <div className="flex flex-col items-center gap-2 md:flex-row">
                 <Button size="icon">
                   <Phone className="h-6 w-6 text-secondary" />
                 </Button>
-                <div className="ml-2 flex flex-col">
+                <div className="ml-2 flex flex-col text-center md:text-left">
                   <h1 className="ml-2 font-semibold tracking-tight text-secondary">
                     Check out your options
                   </h1>
