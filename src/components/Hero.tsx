@@ -84,7 +84,7 @@ function Hero() {
                   </h1>
                   <p className="ml-2 font-light text-muted">
                     Or Call us at{' '}
-                    <Link href="+1 (732) 491-1541" className="underline">
+                    <Link href="tel:+1 (732) 491-1541" className="underline">
                       +1 (732) 491-1541
                     </Link>
                   </p>
