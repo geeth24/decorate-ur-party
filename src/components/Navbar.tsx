@@ -43,7 +43,7 @@ function Navbar() {
           className="h-10 w-10"
         />
         <h1 className="font-playfair text-2xl font-bold">Decorate Ur Party</h1>
-      </div>{' '}
+      </div>
       <div className="flex gap-4">
         <div className="hidden gap-4 md:flex">
           {links.map(({ name, href }) => (
@@ -69,7 +69,7 @@ function Navbar() {
                   height={200}
                   className="h-16 w-16"
                 />
-                <h1 className="font-playfair text-2xl font-bold">Decorate Ur Party</h1>
+                <h1 className="font-playfair text-2xl font-bold text-primary">Decorate Ur Party</h1>
               </div>
               <div className="mt-4 flex w-full flex-col gap-4">
                 {links.map(({ name, href }) => (
