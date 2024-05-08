@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Playfair_Display, Montserrat } from 'next/font/google';
 import './globals.css';
+import Navbar from '@/components/Navbar';
 
 const pd = Playfair_Display({ subsets: ['latin'], variable: '--font-playfair-display' });
 const m = Montserrat({ subsets: ['latin'], variable: '--font-montserrat' });
@@ -17,7 +18,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${pd.variable} ${m.variable}`}>{children}</body>
+      <body className={`${pd.variable} ${m.variable}`}>
+        <Navbar />
+        {children}
+      </body>
     </html>
   );
 }
