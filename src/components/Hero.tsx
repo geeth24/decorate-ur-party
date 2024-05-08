@@ -42,7 +42,7 @@ function Hero() {
         objectFit="cover"
         className="absolute z-[-1] h-full w-full object-cover object-center"
       />
-      <div className="absolute z-0 h-full w-full bg-black/50" />
+      <div className="absolute z-0 h-full w-full bg-black/70" />
       <AuroraBackground className="z-10 h-full w-full">
         <div className="h-full w-full" />
       </AuroraBackground>
@@ -54,7 +54,7 @@ function Hero() {
       >
         <div className="flex max-w-3xl flex-col text-left">
           <motion.h1
-            className="text-4xl font-black tracking-tight text-secondary md:text-6xl"
+            className="font-playfair text-4xl font-black tracking-tight text-secondary md:text-6xl"
             variants={itemVariants}
           >
             Make Every <br />
