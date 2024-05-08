@@ -51,7 +51,7 @@ function Hero() {
         variants={containerVariants}
         initial="hidden"
         whileInView="visible"
-        viewport={{ once: true }}
+        viewport={{ once: true, margin: '200px' }}
       >
         <div className="flex max-w-3xl flex-col text-left">
           <motion.h1

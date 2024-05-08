@@ -16,7 +16,10 @@ export const AuroraBackground = ({
   return (
     <main>
       <div
-        className={cn('transition-bg  flex   flex-col items-center justify-center', className)}
+        className={cn(
+          'transition-bg  flex h-[calc(100vh-64px)]   flex-col items-center justify-center',
+          className,
+        )}
         {...props}
       >
         <div className="absolute inset-0 overflow-hidden">

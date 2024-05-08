@@ -65,7 +65,7 @@ function Decorations() {
         variants={containerVariants}
         initial="hidden"
         whileInView="visible"
-        viewport={{ once: true, margin: '-200px' }}
+        viewport={{ once: true }}
       >
         <motion.h1
           className="font-playfair text-3xl font-black tracking-tight text-primary-foreground"
