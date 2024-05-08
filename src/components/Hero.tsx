@@ -5,6 +5,7 @@ import React from 'react';
 import { Button } from './ui/button';
 import { Phone } from 'lucide-react';
 import Link from 'next/link';
+import { AuroraBackground } from './ui/aurora-background';
 
 function Hero() {
   // Animation variants for the container and items
@@ -41,16 +42,19 @@ function Hero() {
         objectFit="cover"
         className="absolute z-[-1] h-full w-full object-cover object-center"
       />
-      <div className="absolute left-0 top-0 h-full w-full bg-secondary-foreground/50" />
+      <div className="absolute z-0 h-full w-full bg-black/50" />
+      <AuroraBackground className="z-10 h-full w-full">
+        <div className="h-full w-full" />
+      </AuroraBackground>
       <motion.div
-        className="z-10  flex w-full items-start gap-4"
+        className="z-20  flex w-full items-start gap-4"
         variants={containerVariants}
         initial="hidden"
         animate="visible"
       >
         <div className="flex max-w-3xl flex-col text-left">
           <motion.h1
-            className="text-4xl font-black text-secondary md:text-6xl"
+            className="text-4xl font-black tracking-tight text-secondary md:text-6xl"
             variants={itemVariants}
           >
             Make Every <br />
@@ -75,7 +79,9 @@ function Hero() {
                   <Phone className="h-6 w-6 text-secondary" />
                 </Button>
                 <div className="ml-2 flex flex-col">
-                  <h1 className="ml-2 font-semibold text-white">Check out your options</h1>
+                  <h1 className="ml-2 font-semibold tracking-tight text-secondary">
+                    Check out your options
+                  </h1>
                   <p className="ml-2 font-light text-muted">
                     Or Call us at{' '}
                     <Link href="+1 (732) 491-1541" className="underline">
