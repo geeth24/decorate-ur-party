@@ -11,7 +11,7 @@ export default function Home() {
   return (
     <div className="flex min-h-screen flex-col">
       {/* Header */}
-      <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+      <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur-sm supports-backdrop-filter:bg-background/60">
         <div className="container flex h-16 items-center justify-between">
           <div className="flex items-center gap-2">
             <Image
@@ -391,7 +391,7 @@ export default function Home() {
                       </label>
                       <input
                         id="name"
-                        className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                        className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring"
                         placeholder="Your name"
                       />
                     </div>
@@ -402,7 +402,7 @@ export default function Home() {
                       <input
                         id="email"
                         type="email"
-                        className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                        className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring"
                         placeholder="Your email"
                       />
                     </div>
@@ -414,7 +414,7 @@ export default function Home() {
                     <input
                       id="phone"
                       type="tel"
-                      className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                      className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring"
                       placeholder="Your phone number"
                     />
                   </div>
@@ -424,9 +424,10 @@ export default function Home() {
                     </label>
                     <select
                       id="event-type"
-                      className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                      className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring"
+                      defaultValue=""
                     >
-                      <option value="" disabled selected>
+                      <option value="" disabled>
                         Select event type
                       </option>
                       <option value="birthday">Birthday Party</option>
@@ -444,7 +445,7 @@ export default function Home() {
                     </label>
                     <textarea
                       id="message"
-                      className="w-full min-h-[120px] rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                      className="w-full min-h-[120px] rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring"
                       placeholder="Tell us about your event and decoration needs"
                     />
                   </div>
@@ -535,7 +536,13 @@ export default function Home() {
   )
 }
 
-function ServiceCard({ title, description, icon }) {
+interface ServiceCardProps {
+  title: string;
+  description: string;
+  icon: string;
+}
+
+function ServiceCard({ title, description, icon }: ServiceCardProps) {
   return (
     <Card className="overflow-hidden">
       <CardContent className="p-6">
@@ -559,7 +566,14 @@ function ServiceCard({ title, description, icon }) {
   )
 }
 
-function TestimonialCard({ name, role, testimonial, image }) {
+interface TestimonialCardProps {
+  name: string;
+  role: string;
+  testimonial: string;
+  image: string;
+}
+
+function TestimonialCard({ name, role, testimonial, image }: TestimonialCardProps) {
   return (
     <Card>
       <CardContent className="p-6">

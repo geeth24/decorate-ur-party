@@ -40,7 +40,7 @@ export const AuroraBackground = ({
             after:inset-0 
             after:mix-blend-difference after:content-[""] after:[background-attachment:fixed]
             after:[background-image:var(--white-gradient),var(--aurora)]
-            after:[background-size:200%,_100%] dark:invert-0 dark:[background-image:var(--dark-gradient),var(--aurora)] after:dark:[background-image:var(--dark-gradient),var(--aurora)]`,
+            after:[background-size:200%,_100%] dark:invert-0 dark:[background-image:var(--dark-gradient),var(--aurora)] dark:after:[background-image:var(--dark-gradient),var(--aurora)]`,
 
               showRadialGradient &&
                 `[mask-image:radial-gradient(ellipse_at_100%_0%,black_10%,var(--transparent)_70%)]`,
