@@ -1,3 +1,5 @@
+"use client"
+import { motion } from "framer-motion"
 import Image from "next/image"
 import { Card, CardContent } from "@/components/ui/card"
 
@@ -31,7 +33,7 @@ interface TestimonialCardProps {
 
 function TestimonialCard({ name, role, testimonial, image }: TestimonialCardProps) {
   return (
-    <Card>
+    <Card className="hover-lift h-full ring-1 ring-border">
       <CardContent className="p-6">
         <div className="flex flex-col gap-4">
           <div className="flex items-center gap-4">
@@ -48,7 +50,7 @@ function TestimonialCard({ name, role, testimonial, image }: TestimonialCardProp
             </div>
           </div>
           <p className="text-muted-foreground italic">"{testimonial}"</p>
-          <div className="flex text-amber-500">
+          <div className="flex text-primary">
             {Array.from({ length: 5 }).map((_, i) => (
               <svg
                 key={i}
@@ -74,26 +76,23 @@ function TestimonialCard({ name, role, testimonial, image }: TestimonialCardProp
 }
 
 export default function TestimonialsSection() {
+  const containerVariants = { hidden: { opacity: 0, y: 24 }, visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut", staggerChildren: 0.08 } } }
+  const itemVariants = { hidden: { opacity: 0, y: 12 }, visible: { opacity: 1, y: 0, transition: { duration: 0.45 } } }
   return (
-    <section id="testimonials" className="py-16 md:py-24">
-      <div className="container space-y-8">
-        <div className="text-center space-y-2">
-          <h2 className="font-playfair text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">What Our Clients Say</h2>
-          <p className="mx-auto max-w-[700px] text-muted-foreground md:text-xl">
-            Don't just take our word for it - hear from our happy customers
-          </p>
-        </div>
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+    <section id="testimonials" className="relative py-16 md:py-24">
+      <div className="bg-aurora-subtle" />
+      <div className="container relative space-y-12">
+        <motion.div className="text-center space-y-4" initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-100px" }} transition={{ duration: 0.6 }}>
+          <h2 className="section-title section-title-underline">What Our Clients Say</h2>
+          <p className="section-subtitle">Don't just take our word for it — hear from our happy customers</p>
+        </motion.div>
+        <motion.div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3" variants={containerVariants} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-80px" }}>
           {testimonials.map((testimonial) => (
-            <TestimonialCard
-              key={testimonial.name}
-              name={testimonial.name}
-              role={testimonial.role}
-              testimonial={testimonial.testimonial}
-              image={testimonial.image}
-            />
+            <motion.div key={testimonial.name} className="rounded-xl" variants={itemVariants}>
+              <TestimonialCard name={testimonial.name} role={testimonial.role} testimonial={testimonial.testimonial} image={testimonial.image} />
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   )

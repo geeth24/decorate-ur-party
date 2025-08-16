@@ -1,3 +1,5 @@
+"use client"
+import { motion } from "framer-motion"
 import Image from "next/image"
 import { ChevronRight } from "lucide-react"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
@@ -50,17 +52,18 @@ const events = [
 ]
 
 export default function EventsSection() {
+  const containerVariants = { hidden: { opacity: 0, y: 24 }, visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut", staggerChildren: 0.1 } } }
+  const itemVariants = { hidden: { opacity: 0, y: 12 }, visible: { opacity: 1, y: 0, transition: { duration: 0.45 } } }
   return (
-    <section id="events" className="py-16 md:py-24">
-      <div className="container space-y-8">
-        <div className="text-center space-y-2">
-          <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">Events We Decorate</h2>
-          <p className="mx-auto max-w-[700px] text-muted-foreground md:text-xl">
-            From intimate gatherings to grand celebrations, we've got you covered
-          </p>
-        </div>
+    <section id="events" className="relative py-16 md:py-24">
+      <div className="bg-aurora-subtle" />
+      <div className="container relative space-y-12">
+        <motion.div className="text-center space-y-4" initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-100px" }} transition={{ duration: 0.6 }}>
+          <h2 className="section-title section-title-underline">Events We Decorate</h2>
+          <p className="section-subtitle">From intimate gatherings to grand celebrations, we've got you covered</p>
+        </motion.div>
         <Tabs defaultValue="birthdays" className="w-full">
-          <TabsList className="grid w-full grid-cols-2 md:grid-cols-4">
+          <TabsList className="grid w-full grid-cols-2 md:grid-cols-4 rounded-xl shadow-sm">
             {events.map((event) => (
               <TabsTrigger key={event.value} value={event.value}>
                 {event.label}
@@ -69,30 +72,23 @@ export default function EventsSection() {
           </TabsList>
           {events.map((event) => (
             <TabsContent key={event.value} value={event.value} className="mt-6">
-              <div className="grid gap-6 md:grid-cols-2">
-                <div className="relative aspect-video overflow-hidden rounded-lg">
-                  <Image
-                    src="/hero-bg.webp"
-                    alt={`${event.title} decoration`}
-                    fill
-                    className="object-cover transition-all hover:scale-105"
-                  />
-                </div>
-                <div className="flex flex-col justify-center space-y-4">
-                  <h3 className="text-2xl font-bold">{event.title}</h3>
-                  <p className="text-muted-foreground">
-                    {event.description}
-                  </p>
+              <motion.div className="grid gap-6 md:grid-cols-2" variants={containerVariants} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-80px" }}>
+                <motion.div className="relative aspect-video overflow-hidden rounded-xl ring-1 ring-border image-shine" variants={itemVariants}>
+                  <Image src="/hero-bg.webp" alt={`${event.title} decoration`} fill className="object-cover transition-all hover:scale-105" />
+                </motion.div>
+                <motion.div className="flex flex-col justify-center space-y-4" variants={itemVariants}>
+                  <h3 className="text-2xl font-semibold">{event.title}</h3>
+                  <p className="text-muted-foreground">{event.description}</p>
                   <ul className="grid gap-2">
                     {event.features.map((feature) => (
                       <li key={feature} className="flex items-center gap-2">
-                        <ChevronRight className="h-4 w-4 text-primary" />
+                        <ChevronRight className="h-4 w-4 text-primary float-slow" />
                         <span>{feature}</span>
                       </li>
                     ))}
                   </ul>
-                </div>
-              </div>
+                </motion.div>
+              </motion.div>
             </TabsContent>
           ))}
         </Tabs>

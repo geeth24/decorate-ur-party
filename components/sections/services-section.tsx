@@ -1,3 +1,5 @@
+"use client"
+import { motion } from "framer-motion"
 import { PartyPopper, Flower2, PanelsTopLeft, Image as ImageIcon, Table2, Sparkles } from "lucide-react"
 import type { ReactNode } from "react"
 import { Card, CardContent } from "@/components/ui/card"
@@ -43,14 +45,14 @@ interface ServiceCardProps {
 
 function ServiceCard({ title, description, icon }: ServiceCardProps) {
   return (
-    <Card className="overflow-hidden">
+    <Card className="card-bezel hover-lift h-full overflow-hidden">
       <CardContent className="p-6">
         <div className="flex flex-col items-center text-center space-y-4">
-          <div className="rounded-full p-4 bg-primary/10 text-primary">
+          <div className="rounded-full p-4 bg-primary/10 text-primary ring-1 ring-primary/20 float-slow">
             {icon}
           </div>
           <div className="space-y-2">
-            <h3 className="font-bold">{title}</h3>
+            <h3 className="text-lg font-semibold">{title}</h3>
             <p className="text-sm text-muted-foreground">{description}</p>
           </div>
         </div>
@@ -60,25 +62,36 @@ function ServiceCard({ title, description, icon }: ServiceCardProps) {
 }
 
 export default function ServicesSection() {
+  const containerVariants = {
+    hidden: { opacity: 0, y: 24 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.6, ease: "easeOut", staggerChildren: 0.08 }
+    }
+  }
+  const itemVariants = { hidden: { opacity: 0, y: 16 }, visible: { opacity: 1, y: 0, transition: { duration: 0.5 } } }
   return (
-    <section id="services" className="bg-muted py-16 md:py-24">
-      <div className="container space-y-8">
-        <div className="text-center space-y-2">
-          <h2 className="font-playfair text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">Our Decoration Services</h2>
-          <p className="mx-auto max-w-[700px] text-muted-foreground md:text-xl">
-            We offer a wide range of decoration services to make your events special
-          </p>
-        </div>
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+    <section id="services" className="relative bg-muted/60 py-16 md:py-24">
+      <div className="bg-aurora-subtle" />
+      <div className="container relative space-y-12">
+        <motion.div className="text-center space-y-4" initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-100px" }} transition={{ duration: 0.6 }}>
+          <h2 className="section-title section-title-underline">Our Decoration Services</h2>
+          <p className="section-subtitle">We offer a wide range of decoration services to make your events special</p>
+        </motion.div>
+        <motion.div
+          className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3"
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-80px" }}
+        >
           {services.map((service) => (
-            <ServiceCard
-              key={service.title}
-              title={service.title}
-              description={service.description}
-              icon={service.icon}
-            />
+            <motion.div key={service.title} className="rounded-xl" variants={itemVariants}>
+              <ServiceCard title={service.title} description={service.description} icon={service.icon} />
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   )

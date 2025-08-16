@@ -1,5 +1,6 @@
 'use client'
 
+import { motion } from 'framer-motion'
 import { useState } from 'react'
 import { MapPin, Phone, Mail, Instagram, Facebook, Loader2 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
@@ -85,16 +86,17 @@ export default function ContactSection() {
   }
 
   return (
-    <section id="contact" className="bg-muted py-16 md:py-24">
-      <div className="container">
+    <section id="contact" className="relative bg-muted/60 py-16 md:py-24">
+      <div className="bg-aurora-subtle" />
+      <div className="container relative space-y-12">
         <div className="grid gap-8 lg:grid-cols-2">
           <div className="space-y-6">
-            <div className="space-y-2">
-              <h2 className="font-playfair text-3xl font-bold tracking-tighter sm:text-4xl">Get in Touch</h2>
-              <p className="text-muted-foreground">
+            <motion.div className="space-y-4" initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: '-80px' }} transition={{ duration: 0.6 }}>
+              <h2 className="section-title section-title-underline">Get in Touch</h2>
+              <p className="section-subtitle">
                 Ready to make your event special? Contact us for a free consultation and quote.
               </p>
-            </div>
+            </motion.div>
             <div className="space-y-4">
               <div className="flex items-center gap-3">
                 <MapPin className="h-5 w-5 text-primary" />
@@ -129,25 +131,26 @@ export default function ContactSection() {
               </Button>
             </div>
           </div>
-          <div className="space-y-4 rounded-lg border bg-background p-6">
+          <motion.div className="rounded-xl" initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: '-80px' }} transition={{ duration: 0.6 }}>
+            <div className="space-y-4 rounded-xl ring-1 ring-border p-6">
             <div className="space-y-2">
-              <h3 className="text-xl font-bold">Request a Quote</h3>
+              <h3 className="text-xl font-semibold">Request a Quote</h3>
               <p className="text-sm text-muted-foreground">
                 Fill out the form below and we'll get back to you within 24 hours.
               </p>
             </div>
             
             {submitStatus === 'success' && (
-              <div className="p-4 bg-green-50 border border-green-200 rounded-md">
-                <p className="text-green-800 text-sm">
+              <div className="p-4 bg-primary/10 border border-primary/20 rounded-md">
+                <p className="text-primary text-sm">
                   Thank you! Your message has been sent successfully. We'll get back to you within 24 hours.
                 </p>
               </div>
             )}
 
             {submitStatus === 'error' && (
-              <div className="p-4 bg-red-50 border border-red-200 rounded-md">
-                <p className="text-red-800 text-sm">
+              <div className="p-4 bg-destructive/10 border border-destructive/20 rounded-md">
+                <p className="text-destructive text-sm">
                   Something went wrong. Please try again or contact us directly.
                 </p>
               </div>
@@ -163,13 +166,13 @@ export default function ContactSection() {
                     id="name"
                     value={formData.name}
                     onChange={(e) => handleInputChange('name', e.target.value)}
-                    className={`w-full rounded-md border bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring ${
-                      errors.name ? 'border-red-500' : 'border-input'
+                    className={`w-full input-bezel px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring ${
+                      errors.name ? 'border-destructive' : 'border-input'
                     }`}
                     placeholder="Your name"
                   />
                   {errors.name && (
-                    <p className="text-red-500 text-xs">{errors.name}</p>
+                    <p className="text-destructive text-xs">{errors.name}</p>
                   )}
                 </div>
                 <div className="space-y-2">
@@ -181,13 +184,13 @@ export default function ContactSection() {
                     type="email"
                     value={formData.email}
                     onChange={(e) => handleInputChange('email', e.target.value)}
-                    className={`w-full rounded-md border bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring ${
-                      errors.email ? 'border-red-500' : 'border-input'
+                    className={`w-full input-bezel px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring ${
+                      errors.email ? 'border-destructive' : 'border-input'
                     }`}
                     placeholder="Your email"
                   />
                   {errors.email && (
-                    <p className="text-red-500 text-xs">{errors.email}</p>
+                    <p className="text-destructive text-xs">{errors.email}</p>
                   )}
                 </div>
               </div>
@@ -200,13 +203,13 @@ export default function ContactSection() {
                   type="tel"
                   value={formData.phone}
                   onChange={(e) => handleInputChange('phone', e.target.value)}
-                  className={`w-full rounded-md border bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring ${
-                    errors.phone ? 'border-red-500' : 'border-input'
+                  className={`w-full input-bezel px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring ${
+                    errors.phone ? 'border-destructive' : 'border-input'
                   }`}
                   placeholder="Your phone number"
                 />
                 {errors.phone && (
-                  <p className="text-red-500 text-xs">{errors.phone}</p>
+                  <p className="text-destructive text-xs">{errors.phone}</p>
                 )}
               </div>
               <div className="space-y-2">
@@ -217,8 +220,8 @@ export default function ContactSection() {
                   id="event-type"
                   value={formData.eventType}
                   onChange={(e) => handleInputChange('eventType', e.target.value)}
-                  className={`w-full rounded-md border bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring ${
-                    errors.eventType ? 'border-red-500' : 'border-input'
+                  className={`w-full input-bezel px-3 py-2 text-sm ring-offset-background focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring ${
+                    errors.eventType ? 'border-destructive' : 'border-input'
                   }`}
                 >
                   <option value="">Select event type</option>
@@ -231,7 +234,7 @@ export default function ContactSection() {
                   <option value="Other">Other</option>
                 </select>
                 {errors.eventType && (
-                  <p className="text-red-500 text-xs">{errors.eventType}</p>
+                  <p className="text-destructive text-xs">{errors.eventType}</p>
                 )}
               </div>
               <div className="space-y-2">
@@ -242,19 +245,20 @@ export default function ContactSection() {
                   id="message"
                   value={formData.message}
                   onChange={(e) => handleInputChange('message', e.target.value)}
-                  className={`w-full min-h-[120px] rounded-md border bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring ${
-                    errors.message ? 'border-red-500' : 'border-input'
+                  className={`w-full min-h-[120px] input-bezel px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring ${
+                    errors.message ? 'border-destructive' : 'border-input'
                   }`}
                   placeholder="Tell us about your event and decoration needs"
                 />
                 {errors.message && (
-                  <p className="text-red-500 text-xs">{errors.message}</p>
+                  <p className="text-destructive text-xs">{errors.message}</p>
                 )}
               </div>
               <Button 
                 type="submit" 
                 className="w-full" 
                 disabled={isSubmitting}
+                variant="bezel"
               >
                 {isSubmitting ? (
                   <>
@@ -266,7 +270,8 @@ export default function ContactSection() {
                 )}
               </Button>
             </form>
-          </div>
+            </div>
+          </motion.div>
         </div>
       </div>
     </section>

@@ -1,12 +1,21 @@
+"use client"
+import { motion } from "framer-motion"
 import Link from "next/link"
 import Image from "next/image"
 import { Phone, Mail, MapPin } from "lucide-react"
 
 export default function Footer() {
   return (
-    <footer className="border-t bg-background">
-      <div className="container py-8 md:py-12">
-        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
+    <footer className="relative border-t bg-background">
+      <div className="bg-aurora-subtle" />
+      <div className="container relative py-8 md:py-12">
+        <motion.div
+          className="grid gap-8 md:grid-cols-2 lg:grid-cols-4"
+          initial={{ opacity: 0, y: 12 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-60px" }}
+          transition={{ duration: 0.5 }}
+        >
           <div className="space-y-4">
             <div className="flex items-center gap-2">
               <Image
@@ -60,10 +69,21 @@ export default function Footer() {
               </li>
             </ul>
           </div>
-        </div>
-        <div className="mt-8 border-t pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+        </motion.div>
+        <motion.div
+          className="mt-8 border-t pt-8 flex flex-col md:flex-row justify-between items-center gap-4"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true, margin: "-60px" }}
+          transition={{ duration: 0.5, delay: 0.1 }}
+        >
           <p className="text-sm text-muted-foreground">
-            © {new Date().getFullYear()} Decorate Urparty. All rights reserved.
+            <Link href="https://geeth.co" className="text-muted-foreground hover:text-foreground">
+             Built by <span className="text-primary underline">Geeth</span>
+            </Link>
+          </p>
+          <p className="text-sm text-muted-foreground">
+            Decorate Ur Party © {new Date().getFullYear()}
           </p>
           <div className="flex gap-4">
             <Link href="#" className="text-sm text-muted-foreground hover:text-foreground">
@@ -73,7 +93,7 @@ export default function Footer() {
               Terms of Service
             </Link>
           </div>
-        </div>
+        </motion.div>
       </div>
     </footer>
   )
