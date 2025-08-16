@@ -6,14 +6,17 @@ import {
   Sheet,
   SheetContent,
   SheetTrigger,
+  SheetClose,
 } from '@/components/ui/sheet';
 import { Menu } from 'lucide-react';
 import Image from 'next/image';
 
 const links: { name: string; href: string }[] = [
-  { name: 'Home', href: '/' },
-  { name: 'Decorations', href: '/decorations' },
-  { name: 'Contact', href: '/contact' },
+  { name: 'Services', href: '/#services' },
+  { name: 'Events', href: '/#events' },
+  { name: 'Gallery', href: '/#gallery' },
+  { name: 'Testimonials', href: '/#testimonials' },
+  { name: 'Contact', href: '/#contact' },
 ];
 
 function Navbar() {
@@ -57,7 +60,7 @@ function Navbar() {
                 <Menu className="h-6 w-6" />
               </Button>
             </SheetTrigger>
-            <SheetContent>
+            <SheetContent side="right" className="p-4" aria-label="Main navigation">
               <div className="flex items-center">
                 <Image
                   src="/logo.png"
@@ -68,11 +71,13 @@ function Navbar() {
                 />
                 <h1 className="font-playfair text-2xl font-bold text-primary">Decorate Ur Party</h1>
               </div>
-              <div className="mt-4 flex w-full flex-col gap-4">
+              <div className="mt-4 flex w-full flex-col gap-1">
                 {links.map(({ name, href }) => (
-                  <Link href={href} key={name} className="text-primary">
-                    {name}
-                  </Link>
+                  <SheetClose asChild key={name}>
+                    <Link href={href} className="text-primary rounded-md px-2 py-2 hover:bg-secondary">
+                      {name}
+                    </Link>
+                  </SheetClose>
                 ))}
               </div>
             </SheetContent>
