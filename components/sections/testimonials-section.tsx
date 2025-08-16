@@ -1,7 +1,7 @@
 "use client"
 import { motion } from "framer-motion"
-import Image from "next/image"
 import { Card, CardContent } from "@/components/ui/card"
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 
 const testimonials = [
   {
@@ -37,13 +37,12 @@ function TestimonialCard({ name, role, testimonial, image }: TestimonialCardProp
       <CardContent className="p-6">
         <div className="flex flex-col gap-4">
           <div className="flex items-center gap-4">
-            <Image
-              src={image || "/placeholder.svg"}
-              alt={name}
-              width={50}
-              height={50}
-              className="rounded-full h-12 w-12 object-cover"
-            />
+            <Avatar className="h-12 w-12">
+              <AvatarImage src={image} alt={name} />
+              <AvatarFallback>
+                {name.charAt(0)}
+              </AvatarFallback>
+            </Avatar>
             <div>
               <h4 className="font-semibold">{name}</h4>
               <p className="text-sm text-muted-foreground">{role}</p>

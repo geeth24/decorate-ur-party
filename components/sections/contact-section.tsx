@@ -4,6 +4,7 @@ import { motion } from 'framer-motion'
 import { useState } from 'react'
 import { MapPin, Phone, Mail, Instagram, Facebook, Loader2 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { z } from 'zod'
 
 const contactSchema = z.object({
@@ -213,29 +214,22 @@ export default function ContactSection() {
                 )}
               </div>
               <div className="space-y-2">
-                <label htmlFor="event-type" className="text-sm font-medium">
-                  Event Type
-                </label>
-                <select
-                  id="event-type"
-                  value={formData.eventType}
-                  onChange={(e) => handleInputChange('eventType', e.target.value)}
-                  className={`w-full input-bezel px-3 py-2 text-sm ring-offset-background focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring ${
-                    errors.eventType ? 'border-destructive' : 'border-input'
-                  }`}
-                >
-                  <option value="">Select event type</option>
-                  <option value="Birthday Party">Birthday Party</option>
-                  <option value="Wedding">Wedding</option>
-                  <option value="Baby Shower">Baby Shower</option>
-                  <option value="Corporate Event">Corporate Event</option>
-                  <option value="House Warming">House Warming</option>
-                  <option value="Annaprashan">Annaprashan</option>
-                  <option value="Other">Other</option>
-                </select>
-                {errors.eventType && (
-                  <p className="text-destructive text-xs">{errors.eventType}</p>
-                )}
+                <label className="text-sm font-medium">Event Type</label>
+                <Select value={formData.eventType} onValueChange={(v) => handleInputChange('eventType', v)}>
+                  <SelectTrigger className="w-full bg-background">
+                    <SelectValue placeholder="Select event type" />
+                  </SelectTrigger>
+                  <SelectContent className='bg-background'>
+                    <SelectItem value="Birthday Party">Birthday Party</SelectItem>
+                    <SelectItem value="Wedding">Wedding</SelectItem>
+                    <SelectItem value="Baby Shower">Baby Shower</SelectItem>
+                    <SelectItem value="Corporate Event">Corporate Event</SelectItem>
+                    <SelectItem value="House Warming">House Warming</SelectItem>
+                    <SelectItem value="Annaprashan">Annaprashan</SelectItem>
+                    <SelectItem value="Other">Other</SelectItem>
+                  </SelectContent>
+                </Select>
+                {errors.eventType && <p className="text-destructive text-xs">{errors.eventType}</p>}
               </div>
               <div className="space-y-2">
                 <label htmlFor="message" className="text-sm font-medium">
