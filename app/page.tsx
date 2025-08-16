@@ -1,6 +1,7 @@
 import Link from "next/link"
 import Image from "next/image"
-import { ChevronRight, MapPin, Phone, Mail, Instagram, Facebook } from "lucide-react"
+import { ChevronRight, MapPin, Phone, Mail, Instagram, Facebook, PartyPopper, Flower2, PanelsTopLeft, Image as ImageIcon, Table2, Sparkles } from "lucide-react"
+import type { ReactNode } from "react"
 
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
@@ -10,60 +11,6 @@ import Hero from "@/components/hero"
 export default function Home() {
   return (
     <div className="flex min-h-screen flex-col">
-      Header
-      <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur-sm supports-backdrop-filter:bg-background/60">
-        <div className="container flex h-16 items-center justify-between">
-          <div className="flex items-center gap-2">
-            <Image
-              src="/placeholder.svg?height=40&width=40"
-              alt="Decorate Urparty Logo"
-              width={40}
-              height={40}
-              className="rounded-full"
-            />
-            <span className="text-xl font-bold">Decorate Urparty</span>
-          </div>
-          <nav className="hidden md:flex gap-6">
-            <Link href="#services" className="text-sm font-medium hover:text-primary">
-              Services
-            </Link>
-            <Link href="#events" className="text-sm font-medium hover:text-primary">
-              Events
-            </Link>
-            <Link href="#gallery" className="text-sm font-medium hover:text-primary">
-              Gallery
-            </Link>
-            <Link href="#testimonials" className="text-sm font-medium hover:text-primary">
-              Testimonials
-            </Link>
-            <Link href="#contact" className="text-sm font-medium hover:text-primary">
-              Contact
-            </Link>
-          </nav>
-          <Button asChild className="hidden md:inline-flex">
-            <Link href="#contact">Get a Quote</Link>
-          </Button>
-          <Button variant="outline" size="icon" className="md:hidden">
-            <span className="sr-only">Toggle menu</span>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              className="h-6 w-6"
-            >
-              <line x1="4" x2="20" y1="12" y2="12" />
-              <line x1="4" x2="20" y1="6" y2="6" />
-              <line x1="4" x2="20" y1="18" y2="18" />
-            </svg>
-          </Button>
-        </div>
-      </header>
 
       <main className="flex-1">
         {/* Hero Section */}
@@ -73,7 +20,7 @@ export default function Home() {
         <section id="services" className="bg-muted py-16 md:py-24">
           <div className="container space-y-8">
             <div className="text-center space-y-2">
-              <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">Our Decoration Services</h2>
+              <h2 className="font-playfair text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">Our Decoration Services</h2>
               <p className="mx-auto max-w-[700px] text-muted-foreground md:text-xl">
                 We offer a wide range of decoration services to make your events special
               </p>
@@ -82,32 +29,32 @@ export default function Home() {
               <ServiceCard
                 title="Balloon Decorations"
                 description="Balloon arches, walls, and themed installations to add color and fun to your events."
-                icon="/placeholder.svg?height=80&width=80"
+                icon={<PartyPopper className="h-10 w-10 text-primary" />}
               />
               <ServiceCard
                 title="Floral Arrangements"
                 description="Beautiful centerpieces, backdrops, and bridal bouquets with fresh and artificial flowers."
-                icon="/placeholder.svg?height=80&width=80"
+                icon={<Flower2 className="h-10 w-10 text-primary" />}
               />
               <ServiceCard
                 title="Theme-Based Decor"
                 description="Custom themes for any occasion, bringing your vision to life with creative designs."
-                icon="/placeholder.svg?height=80&width=80"
+                icon={<PanelsTopLeft className="h-10 w-10 text-primary" />}
               />
               <ServiceCard
                 title="Custom Backdrops & Props"
                 description="Stunning backdrops and props tailored to your event theme and venue."
-                icon="/placeholder.svg?height=80&width=80"
+                icon={<ImageIcon className="h-10 w-10 text-primary" />}
               />
               <ServiceCard
                 title="Table Setup & Centerpieces"
                 description="Elegant table arrangements that complement your event's style and atmosphere."
-                icon="/placeholder.svg?height=80&width=80"
+                icon={<Table2 className="h-10 w-10 text-primary" />}
               />
               <ServiceCard
                 title="LED & Neon Signage"
                 description="Custom LED and neon signs to add a modern touch to your celebration."
-                icon="/placeholder.svg?height=80&width=80"
+                icon={<Sparkles className="h-10 w-10 text-primary" />}
               />
             </div>
           </div>
@@ -133,7 +80,7 @@ export default function Home() {
                 <div className="grid gap-6 md:grid-cols-2">
                   <div className="relative aspect-video overflow-hidden rounded-lg">
                     <Image
-                      src="/placeholder.svg?height=400&width=600"
+                      src="/hero-bg.webp"
                       alt="Birthday decoration"
                       fill
                       className="object-cover transition-all hover:scale-105"
@@ -166,7 +113,7 @@ export default function Home() {
                 <div className="grid gap-6 md:grid-cols-2">
                   <div className="relative aspect-video overflow-hidden rounded-lg">
                     <Image
-                      src="/placeholder.svg?height=400&width=600"
+                      src="/hero-bg.webp"
                       alt="Wedding decoration"
                       fill
                       className="object-cover transition-all hover:scale-105"
@@ -199,7 +146,7 @@ export default function Home() {
                 <div className="grid gap-6 md:grid-cols-2">
                   <div className="relative aspect-video overflow-hidden rounded-lg">
                     <Image
-                      src="/placeholder.svg?height=400&width=600"
+                      src="/hero-bg.webp"
                       alt="Baby shower decoration"
                       fill
                       className="object-cover transition-all hover:scale-105"
@@ -232,7 +179,7 @@ export default function Home() {
                 <div className="grid gap-6 md:grid-cols-2">
                   <div className="relative aspect-video overflow-hidden rounded-lg">
                     <Image
-                      src="/placeholder.svg?height=400&width=600"
+                      src="/hero-bg.webp"
                       alt="Special event decoration"
                       fill
                       className="object-cover transition-all hover:scale-105"
@@ -269,7 +216,7 @@ export default function Home() {
         <section id="gallery" className="bg-muted py-16 md:py-24">
           <div className="container space-y-8">
             <div className="text-center space-y-2">
-              <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">Our Work</h2>
+              <h2 className="font-playfair text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">Our Work</h2>
               <p className="mx-auto max-w-[700px] text-muted-foreground md:text-xl">
                 Browse through our portfolio of stunning event decorations
               </p>
@@ -278,7 +225,7 @@ export default function Home() {
               {Array.from({ length: 8 }).map((_, i) => (
                 <div key={i} className="group relative aspect-square overflow-hidden rounded-lg">
                   <Image
-                    src={`/placeholder.svg?height=400&width=400&text=Gallery+${i + 1}`}
+                    src={`/hero-bg.webp`}
                     alt={`Gallery image ${i + 1}`}
                     fill
                     className="object-cover transition-all group-hover:scale-105"
@@ -303,7 +250,7 @@ export default function Home() {
         <section id="testimonials" className="py-16 md:py-24">
           <div className="container space-y-8">
             <div className="text-center space-y-2">
-              <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">What Our Clients Say</h2>
+              <h2 className="font-playfair text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">What Our Clients Say</h2>
               <p className="mx-auto max-w-[700px] text-muted-foreground md:text-xl">
                 Don't just take our word for it - hear from our happy customers
               </p>
@@ -337,7 +284,7 @@ export default function Home() {
             <div className="grid gap-8 lg:grid-cols-2">
               <div className="space-y-6">
                 <div className="space-y-2">
-                  <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl">Get in Touch</h2>
+                  <h2 className="font-playfair text-3xl font-bold tracking-tighter sm:text-4xl">Get in Touch</h2>
                   <p className="text-muted-foreground">
                     Ready to make your event special? Contact us for a free consultation and quote.
                   </p>
@@ -466,7 +413,7 @@ export default function Home() {
             <div className="space-y-4">
               <div className="flex items-center gap-2">
                 <Image
-                  src="/placeholder.svg?height=40&width=40"
+                  src="/logo.png"
                   alt="Decorate Urparty Logo"
                   width={40}
                   height={40}
@@ -539,7 +486,7 @@ export default function Home() {
 interface ServiceCardProps {
   title: string;
   description: string;
-  icon: string;
+  icon: ReactNode;
 }
 
 function ServiceCard({ title, description, icon }: ServiceCardProps) {
@@ -547,14 +494,8 @@ function ServiceCard({ title, description, icon }: ServiceCardProps) {
     <Card className="overflow-hidden">
       <CardContent className="p-6">
         <div className="flex flex-col items-center text-center space-y-4">
-          <div className="rounded-full p-2 bg-primary/10">
-            <Image
-              src={icon || "/placeholder.svg"}
-              alt={title}
-              width={80}
-              height={80}
-              className="h-12 w-12 object-contain"
-            />
+          <div className="rounded-full p-4 bg-primary/10 text-primary">
+            {icon}
           </div>
           <div className="space-y-2">
             <h3 className="font-bold">{title}</h3>
