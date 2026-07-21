@@ -1,91 +1,32 @@
-'use client';
-import React, { useEffect, useState } from 'react';
-import Link from 'next/link';
-import { Button } from './ui/button';
-import {
-  Sheet,
-  SheetContent,
-  SheetTrigger,
-  SheetClose,
-} from '@/components/ui/sheet';
-import { Menu } from 'lucide-react';
-import Image from 'next/image';
+"use client";
 
-const links: { name: string; href: string }[] = [
-  { name: 'Services', href: '/#services' },
-  { name: 'Events', href: '/#events' },
-  { name: 'Gallery', href: '/#gallery' },
-  { name: 'Testimonials', href: '/#testimonials' },
-  { name: 'Contact', href: '/#contact' },
+import { useState } from "react";
+import Link from "next/link";
+import Image from "next/image";
+import { Menu, X } from "lucide-react";
+
+const links = [
+  ["Services", "/#services"], ["Events", "/#events"], ["Gallery", "/#gallery"], ["Stories", "/#testimonials"],
 ];
 
-function Navbar() {
-  const [scroll, setScroll] = useState(false);
-  useEffect(() => {
-    const handleScroll = () => {
-      setScroll(window.scrollY > 0);
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, []);
+export default function Navbar() {
+  const [open, setOpen] = useState(false);
   return (
-    <nav
-      className={`fixed z-30 flex w-full items-center justify-between   px-6 py-4 transition-all duration-300 ${scroll ? 'bg-secondary text-primary shadow-md' : 'text-secondary'}`}
-    >
-      <div className="flex items-center">
-        <Image
-          src="/logo.png"
-          alt="Decorate Ur Party"
-          width={200}
-          height={200}
-          className="h-10 w-10"
-        />
-        <h1 className="font-playfair text-2xl font-bold">Decorate Ur Party</h1>
+    <header className="fixed inset-x-0 top-0 z-50 border-b border-[var(--line)] bg-[color:var(--paper)]/92 backdrop-blur-md">
+      <div className="shell flex h-16 items-center justify-between">
+        <Link href="/" className="flex items-center gap-2.5" aria-label="Decorate Ur Party home">
+          <Image src="/logo.png" alt="" width={34} height={34} className="h-8 w-8 rounded-full object-cover" />
+          <span className="text-sm font-semibold tracking-[-.02em]">Decorate Ur Party</span>
+        </Link>
+        <nav className="hidden items-center gap-8 md:flex" aria-label="Primary navigation">
+          {links.map(([label, href]) => <Link key={label} href={href} className="text-sm text-[var(--muted)] hover:text-[var(--ink)]">{label}</Link>)}
+          <Link href="/#contact" className="pressable whitespace-nowrap bg-[var(--ink)] px-5 py-2.5 text-sm font-medium text-[var(--paper)] hover:bg-[var(--accent)]">Plan your event</Link>
+        </nav>
+        <button className="p-2 md:hidden" onClick={() => setOpen(!open)} aria-expanded={open} aria-label="Toggle navigation">{open ? <X /> : <Menu />}</button>
       </div>
-      <div className="flex gap-4">
-        <div className="hidden gap-4 md:flex">
-          {links.map(({ name, href }) => (
-            <Button asChild key={name} variant="ghost">
-              <Link href={href}>{name}</Link>
-            </Button>
-          ))}
-        </div>
-
-        <div className="md:hidden">
-          <Sheet>
-            <SheetTrigger asChild>
-              <Button size="icon" variant="ghost">
-                <Menu className="h-6 w-6" />
-              </Button>
-            </SheetTrigger>
-            <SheetContent side="right" className="p-4" aria-label="Main navigation">
-              <div className="flex items-center">
-                <Image
-                  src="/logo.png"
-                  alt="Decorate Ur Party"
-                  width={200}
-                  height={200}
-                  className="h-16 w-16"
-                />
-                <h1 className="font-playfair text-2xl font-bold text-primary">Decorate Ur Party</h1>
-              </div>
-              <div className="mt-4 flex w-full flex-col gap-1">
-                {links.map(({ name, href }) => (
-                  <SheetClose asChild key={name}>
-                    <Link href={href} className="text-primary rounded-md px-2 py-2 hover:bg-secondary">
-                      {name}
-                    </Link>
-                  </SheetClose>
-                ))}
-              </div>
-            </SheetContent>
-          </Sheet>
-        </div>
-      </div>
-    </nav>
+      {open && <nav className="border-t border-[var(--line)] bg-[var(--paper)] px-4 py-5 md:hidden" aria-label="Mobile navigation">
+        <div className="flex flex-col gap-1">{links.map(([label, href]) => <Link key={label} href={href} onClick={() => setOpen(false)} className="px-3 py-3 text-lg">{label}</Link>)}<Link href="/#contact" onClick={() => setOpen(false)} className="mt-3 bg-[var(--ink)] px-4 py-3 text-center text-[var(--paper)]">Plan your event</Link></div>
+      </nav>}
+    </header>
   );
 }
-
-export default Navbar;

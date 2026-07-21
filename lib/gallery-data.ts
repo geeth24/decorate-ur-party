@@ -4,7 +4,11 @@ export interface GalleryImage {
   alt: string
 }
 
-// Generate gallery data for all 284 images
+// Cloudinary configuration
+export const CLOUDINARY_CLOUD_NAME = "dfgs3dzes"
+export const CLOUDINARY_FOLDER = "decors"
+
+// Generate gallery data for all 284 images from Cloudinary
 export const generateGalleryImages = (): GalleryImage[] => {
   const images: GalleryImage[] = []
   
@@ -12,7 +16,7 @@ export const generateGalleryImages = (): GalleryImage[] => {
     const paddedNumber = String(i).padStart(3, '0')
     images.push({
       id: `decor-${paddedNumber}`,
-      src: `/decors/decor-${paddedNumber}.jpeg`,
+      src: `${CLOUDINARY_FOLDER}/decor-${paddedNumber}`,
       alt: `Event decoration ${i}`
     })
   }

@@ -1,7 +1,7 @@
 "use client"
 import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import Image from "next/image"
+import { CldImage } from "next-cloudinary"
 import { Button } from "@/components/ui/button"
 import { X, ChevronLeft, ChevronRight } from "lucide-react"
 import { GalleryImage } from "@/lib/gallery-data"
@@ -83,7 +83,7 @@ export default function GalleryModal({ images, currentIndex, isOpen, onClose, on
               className="relative max-h-full max-w-full"
               onClick={(e) => e.stopPropagation()}
             >
-              <Image
+              <CldImage
                 src={images[currentIndex]?.src || ''}
                 alt={images[currentIndex]?.alt || ''}
                 width={1200}
@@ -91,6 +91,8 @@ export default function GalleryModal({ images, currentIndex, isOpen, onClose, on
                 className="object-contain max-h-[80vh] w-auto"
                 onLoad={() => setImageLoaded(true)}
                 priority
+                quality="auto"
+                format="auto"
               />
               
               <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-black/60 text-white px-4 py-2 rounded-full text-sm">

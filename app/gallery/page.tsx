@@ -1,9 +1,9 @@
 "use client"
-import { useState, useEffect, useCallback } from "react"
+import { useState, useEffect, useCallback, useMemo } from "react"
 import { motion } from "framer-motion"
-import Image from "next/image"
+import { CldImage } from "next-cloudinary"
 import { Button } from "@/components/ui/button"
-import { generateGalleryImages } from "@/lib/gallery-data"
+import { generateGalleryImages, type GalleryImage } from "@/lib/gallery-data"
 import GalleryModal from "@/components/gallery-modal"
 import { ArrowLeft } from "lucide-react"
 import Link from "next/link"
@@ -11,19 +11,19 @@ import Link from "next/link"
 const IMAGES_PER_LOAD = 20
 
 export default function GalleryPage() {
-  const [loadedImages, setLoadedImages] = useState<any[]>([])
+  const [loadedImages, setLoadedImages] = useState<GalleryImage[]>([])
   const [currentIndex, setCurrentIndex] = useState(IMAGES_PER_LOAD)
   const [loading, setLoading] = useState(false)
   const [hasMore, setHasMore] = useState(true)
   const [modalOpen, setModalOpen] = useState(false)
   const [modalImageIndex, setModalImageIndex] = useState(0)
   
-  const allImages = generateGalleryImages()
+  const allImages = useMemo(() => generateGalleryImages(), [])
 
   // Load initial images
   useEffect(() => {
     setLoadedImages(allImages.slice(0, IMAGES_PER_LOAD))
-  }, [])
+  }, [allImages])
 
   // Infinite scroll function
   const loadMoreImages = useCallback(() => {
@@ -67,7 +67,7 @@ export default function GalleryPage() {
   }
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-[100dvh] bg-[var(--paper)] pt-16">
       {/* Header */}
       <div className="sticky top-0 z-40 bg-background/80 backdrop-blur-sm border-b">
         <div className="container py-4">
@@ -97,17 +97,18 @@ export default function GalleryPage() {
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.3, delay: i * 0.02 }}
-              className="group relative aspect-square overflow-hidden rounded-xl cursor-pointer shadow-lg hover:shadow-xl transition-all duration-300"
+              className="group relative aspect-square cursor-pointer overflow-hidden rounded-xl shadow-lg transition-shadow duration-300 hover:shadow-xl"
               onClick={() => handleImageClick(i)}
             >
-              <Image
+              <CldImage
                 src={image.src}
                 alt={image.alt}
                 fill
                 sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, (max-width: 1280px) 25vw, 20vw"
-                className="object-cover transition-all duration-300 group-hover:scale-105"
+                className="object-cover transition-transform duration-300 group-hover:scale-105"
                 loading="lazy"
-                unoptimized
+                crop="fill"
+                gravity="auto"
               />
               <div className="absolute inset-0 bg-black/40 opacity-0 transition-opacity duration-300 group-hover:opacity-100 flex items-center justify-center backdrop-blur-sm">
                 <Button variant="outline" className="bg-white/90 text-black border-white/90 hover:bg-white">
@@ -131,7 +132,7 @@ export default function GalleryPage() {
         {/* End Message */}
         {!hasMore && (
           <div className="text-center py-8">
-            <p className="text-muted-foreground">You've seen all our amazing decorations! 🎉</p>
+            <p className="text-muted-foreground">You&apos;ve seen all our event decorations.</p>
             <Link href="/#contact">
               <Button className="mt-4">
                 Ready to Plan Your Event?
