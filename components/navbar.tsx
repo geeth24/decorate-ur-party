@@ -40,7 +40,7 @@ export default function Navbar() {
         {open && (
           <motion.div
             id="mobile-menu"
-            className="fixed inset-0 top-16 z-40 overflow-hidden bg-[var(--ink)] text-[var(--paper)] md:hidden"
+            className="fixed inset-0 top-16 z-40 overflow-hidden bg-[#171816] text-[#f4f4f0] md:hidden"
             initial={reduce ? false : { opacity: 0, transform: "translateY(-3%)" }}
             animate={{ opacity: 1, transform: "translateY(0%)" }}
             exit={reduce ? { opacity: 0 } : { opacity: 0, transform: "translateY(-2%)" }}
@@ -52,8 +52,8 @@ export default function Navbar() {
               <nav className="mt-8" aria-label="Mobile navigation">
                 {links.map(([label, href, note], index) => (
                   <motion.div key={label} initial={reduce ? false : { opacity: 0, transform: "translateX(-18px)" }} animate={{ opacity: 1, transform: "translateX(0px)" }} transition={{ duration: 0.36, delay: index * 0.055, ease: [0.23, 1, 0.32, 1] }}>
-                    <Link href={href} onClick={() => setOpen(false)} className="group grid grid-cols-[1fr_auto] items-center border-t border-white/20 py-4 last:border-b">
-                      <span><span className="display block text-[clamp(2.5rem,13vw,4.7rem)] leading-none">{label}</span><span className="mt-1 block text-xs text-white/55">{note}</span></span><ArrowUpRight className="text-[var(--accent)]" />
+                    <Link href={href} onClick={() => setOpen(false)} className="group grid grid-cols-[1fr_auto] items-center border-t border-white/25 py-4 last:border-b">
+                      <span><span className="display block text-[clamp(2.5rem,13vw,4.7rem)] leading-none text-[#f4f4f0]">{label}</span><span className="mt-1 block text-xs text-[#b7b8b2]">{note}</span></span><ArrowUpRight className="text-[var(--accent)]" />
                     </Link>
                   </motion.div>
                 ))}
