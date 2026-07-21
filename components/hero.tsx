@@ -1,103 +1,30 @@
-'use client';
-import { motion } from 'framer-motion';
-import Image from 'next/image';
-import React from 'react';
-import { Button } from './ui/button';
-import { Phone } from 'lucide-react';
-import Link from 'next/link';
-import { AuroraBackground } from './ui/aurora-background';
+"use client";
 
-function Hero() {
-  // Animation variants for the container and items
-  const containerVariants = {
-    hidden: { opacity: 0, scale: 0.8 },
-    visible: {
-      opacity: 1,
-      scale: 1,
-      transition: {
-        delayChildren: 0.3,
-        staggerChildren: 0.2,
-      },
-    },
-  };
+import Image from "next/image";
+import Link from "next/link";
+import { ArrowDownRight } from "lucide-react";
+import { motion, useReducedMotion } from "motion/react";
 
-  const itemVariants = {
-    hidden: { y: 20, opacity: 0 },
-    visible: {
-      y: 0,
-      opacity: 1,
-      transition: {
-        type: 'spring',
-        stiffness: 120,
-      },
-    },
-  };
-
+export default function Hero() {
+  const reduce = useReducedMotion();
   return (
-    <div className="relative flex h-[calc(100vh-64px)] w-full flex-col items-center justify-center px-4 sm:px-6 lg:px-8">
-      <Image
-        src="/hero-bg.webp"
-        alt="hero"
-        layout="fill"
-        objectFit="cover"
-        className="absolute z-[-1] h-full w-full object-cover object-center"
-      />
-      <div className="absolute z-0 h-full w-full bg-black/70" />
-      <AuroraBackground className="z-10 h-full w-full">
-        <div className="h-full w-full" />
-      </AuroraBackground>
-      <motion.div
-        className="z-20 flex w-full max-w-7xl items-start gap-4"
-        variants={containerVariants}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: '200px' }}
-      >
-        <div className="flex max-w-3xl flex-col text-left">
-          <motion.h1
-            className="font-playfair text-4xl font-black tracking-tight text-secondary md:text-6xl"
-            variants={itemVariants}
-          >
-            Make Every <br />
-            <span className="text-primary"> Moment Unforgettable </span>
-          </motion.h1>
-          <motion.p
-            className="mt-2 text-base font-light text-muted md:text-lg"
-            variants={itemVariants}
-          >
-            With a dedicated team spread across New Jersey and New York, we specialize in turning
-            your celebrations into memorable milestones. From intimate gatherings to grand affairs,
-            trust us to infuse life into your dreams. Ready to make your next event the most
-            memorable one yet?
-          </motion.p>
-          <motion.div
-            className="mt-4 flex rounded-md bg-primary/50 p-4 backdrop-blur-xl"
-            variants={itemVariants}
-          >
-            <div className="flex w-full flex-col items-center justify-between gap-4 md:flex-row">
-              <div className="flex flex-col items-center gap-2 md:flex-row">
-                <Button size="icon">
-                  <Phone className="h-6 w-6 text-secondary" />
-                </Button>
-                <div className="ml-2 flex flex-col text-center md:text-left">
-                  <h1 className="ml-2 font-semibold tracking-tight text-secondary">
-                    Check out your options
-                  </h1>
-                  <p className="ml-2 font-light text-muted">
-                    Or Call us at{' '}
-                    <Link href="tel:+1 (732) 491-1541" className="underline">
-                      +1 (732) 491-1541
-                    </Link>
-                  </p>
-                </div>
-              </div>
-              <Button variant="secondary">See More</Button>
-            </div>
-          </motion.div>
+    <section className="shell grid min-h-[100dvh] grid-cols-1 gap-8 pb-8 pt-24 md:grid-cols-[.86fr_1.14fr] md:items-center md:gap-12 md:pb-12 md:pt-20">
+      <motion.div className="max-w-xl py-4 md:py-10" initial={reduce ? false : "hidden"} animate="visible" variants={{ hidden: {}, visible: { transition: { staggerChildren: .07 } } }}>
+        <motion.div variants={{ hidden: { opacity: 0, transform: "translateY(14px)" }, visible: { opacity: 1, transform: "translateY(0px)", transition: { duration: .6, ease: [0.23, 1, 0.32, 1] } } }}>
+        <p className="eyebrow mb-6 text-[var(--accent)]">Event styling in New Jersey & New York</p>
+        <h1 className="display text-balance text-[clamp(3.6rem,7vw,7.4rem)] leading-[.84]">Events, composed beautifully.</h1>
+        </motion.div>
+        <motion.div variants={{ hidden: { opacity: 0, transform: "translateY(14px)" }, visible: { opacity: 1, transform: "translateY(0px)", transition: { duration: .6, ease: [0.23, 1, 0.32, 1] } } }}>
+        <p className="mt-7 max-w-md text-base leading-7 text-[var(--muted)] md:text-lg">Florals, backdrops and tablescapes shaped around the way you want the room to feel.</p>
+        <div className="mt-9 flex flex-wrap items-center gap-5">
+          <Link href="/#contact" className="pressable inline-flex items-center gap-3 whitespace-nowrap bg-[var(--accent)] px-6 py-3.5 font-medium text-white hover:bg-[var(--accent-dark)]">Plan your event <ArrowDownRight size={18} /></Link>
+          <Link href="/#gallery" className="border-b border-[var(--ink)] pb-1 text-sm font-medium">See the work</Link>
         </div>
+        </motion.div>
       </motion.div>
-    </div>
+      <motion.div className="relative min-h-[54vh] overflow-hidden md:min-h-[78vh]" initial={reduce ? false : { opacity: 0, clipPath: "polygon(8% 0, 100% 0, 100% 92%, 0 100%, 0 8%)", transform: "scale(.97) rotate(.4deg)" }} animate={{ opacity: 1, clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%, 0 0)", transform: "scale(1) rotate(0deg)" }} transition={{ duration: 1, delay: .12, ease: [0.23, 1, 0.32, 1] }}>
+        <Image src="/editorial/hero-installation.jpg" alt="Sculptural white and coral floral event installation" fill priority sizes="(max-width: 768px) 100vw, 58vw" className="object-cover object-[62%_center]" />
+      </motion.div>
+    </section>
   );
 }
-
-export default Hero;

@@ -5,28 +5,30 @@ import GallerySection from "@/components/sections/gallery-section"
 import TestimonialsSection from "@/components/sections/testimonials-section"
 import ContactSection from "@/components/sections/contact-section"
 import Footer from "@/components/sections/footer"
+import { MotionExperience, Reveal } from "@/components/motion-experience"
 
 export default function Home() {
   return (
-    <div className="flex min-h-screen flex-col">
+    <div className="flex min-h-[100dvh] flex-col">
+      <MotionExperience />
       <main className="flex-1">
         {/* Hero Section */}
         <Hero />
 
         {/* Services Section */}
-        <ServicesSection />
+        <Reveal><ServicesSection /></Reveal>
 
         {/* Events Section */}
-        <EventsSection />
+        <Reveal direction="right"><EventsSection /></Reveal>
 
         {/* Gallery Section */}
-        <GallerySection />
+        <Reveal direction="left"><GallerySection /></Reveal>
 
         {/* Testimonials Section */}
-        <TestimonialsSection />
+        <Reveal><TestimonialsSection /></Reveal>
 
         {/* Contact Section */}
-        <ContactSection />
+        <Reveal direction="right"><ContactSection /></Reveal>
       </main>
 
       {/* Footer */}
@@ -34,4 +36,3 @@ export default function Home() {
     </div>
   )
 }
-
