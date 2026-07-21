@@ -1,12 +1,10 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
-import { Newsreader } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/navbar";
 import { Analytics } from "@vercel/analytics/next";
 
 const geist = localFont({ src: "./fonts/GeistVF.woff", variable: "--font-geist", display: "swap" });
-const newsreader = Newsreader({ subsets: ["latin"], variable: "--font-newsreader", display: "swap" });
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000"),
@@ -19,5 +17,5 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  return <html lang="en"><body className={`${geist.variable} ${newsreader.variable}`}><Navbar />{children}<Analytics /></body></html>;
+  return <html lang="en"><body className={geist.variable}><Navbar />{children}<Analytics /></body></html>;
 }

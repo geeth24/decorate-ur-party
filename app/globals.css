@@ -33,7 +33,7 @@ button:active, .pressable:active { transform: scale(.97); }
 :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
 
 .shell { width: min(100% - 2rem, 86rem); margin-inline: auto; }
-.display { font-family: var(--font-newsreader), serif; letter-spacing: -.045em; }
+.display { font-family: var(--font-geist), sans-serif; font-weight: 520; letter-spacing: -.065em; }
 .eyebrow { font-size: .72rem; font-weight: 650; letter-spacing: .14em; text-transform: uppercase; }
 .section-space { padding-block: clamp(5rem, 10vw, 9rem); }
 .text-balance { text-wrap: balance; }
