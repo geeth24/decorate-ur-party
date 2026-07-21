@@ -1,6 +1,6 @@
 "use client"
-import { useState, useEffect, useCallback, useMemo } from "react"
-import { motion } from "framer-motion"
+import { useState, useEffect, useCallback, useRef } from "react"
+import { motion } from "motion/react"
 import { CldImage } from "next-cloudinary"
 import { Button } from "@/components/ui/button"
 import { generateGalleryImages, type GalleryImage } from "@/lib/gallery-data"
@@ -9,21 +9,18 @@ import { ArrowLeft } from "lucide-react"
 import Link from "next/link"
 
 const IMAGES_PER_LOAD = 20
+const ALL_IMAGES = generateGalleryImages()
 
 export default function GalleryPage() {
-  const [loadedImages, setLoadedImages] = useState<GalleryImage[]>([])
+  const [loadedImages, setLoadedImages] = useState<GalleryImage[]>(() => ALL_IMAGES.slice(0, IMAGES_PER_LOAD))
   const [currentIndex, setCurrentIndex] = useState(IMAGES_PER_LOAD)
   const [loading, setLoading] = useState(false)
   const [hasMore, setHasMore] = useState(true)
   const [modalOpen, setModalOpen] = useState(false)
   const [modalImageIndex, setModalImageIndex] = useState(0)
+  const loadMoreRef = useRef<HTMLDivElement>(null)
   
-  const allImages = useMemo(() => generateGalleryImages(), [])
-
-  // Load initial images
-  useEffect(() => {
-    setLoadedImages(allImages.slice(0, IMAGES_PER_LOAD))
-  }, [allImages])
+  const allImages = ALL_IMAGES
 
   // Infinite scroll function
   const loadMoreImages = useCallback(() => {
@@ -45,16 +42,14 @@ export default function GalleryPage() {
     }, 500) // Small delay to show loading state
   }, [currentIndex, loading, hasMore, allImages])
 
-  // Scroll event listener
   useEffect(() => {
-    const handleScroll = () => {
-      if (window.innerHeight + document.documentElement.scrollTop >= document.documentElement.offsetHeight - 1000) {
-        loadMoreImages()
-      }
-    }
-
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
+    const target = loadMoreRef.current
+    if (!target) return
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) loadMoreImages()
+    }, { rootMargin: "800px 0px" })
+    observer.observe(target)
+    return () => observer.disconnect()
   }, [loadMoreImages])
 
   const handleImageClick = (index: number) => {
@@ -94,8 +89,8 @@ export default function GalleryPage() {
           {loadedImages.map((image, i) => (
             <motion.div
               key={image.id}
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
+              initial={{ opacity: 0, transform: "scale(.94) rotate(.3deg)" }}
+              animate={{ opacity: 1, transform: "scale(1) rotate(0deg)" }}
               transition={{ duration: 0.3, delay: i * 0.02 }}
               className="group relative aspect-square cursor-pointer overflow-hidden rounded-xl shadow-lg transition-shadow duration-300 hover:shadow-xl"
               onClick={() => handleImageClick(i)}
@@ -120,14 +115,8 @@ export default function GalleryPage() {
         </div>
 
         {/* Loading State */}
-        {loading && (
-          <div className="flex justify-center py-8">
-            <div className="flex items-center gap-2">
-              <div className="w-6 h-6 border-2 border-primary border-t-transparent rounded-full animate-spin"></div>
-              <span className="text-muted-foreground">Loading more images...</span>
-            </div>
-          </div>
-        )}
+        <div ref={loadMoreRef} className="h-px" aria-hidden />
+        {loading && <div className="grid grid-cols-2 gap-4 py-8 md:grid-cols-5" aria-label="Loading more event photos">{Array.from({ length: 5 }).map((_, index) => <motion.div key={index} className="aspect-square bg-[var(--surface)]" animate={{ opacity: [.45, .8, .45] }} transition={{ duration: 1.2, delay: index * .08, repeat: Infinity, ease: "easeInOut" }} />)}</div>}
 
         {/* End Message */}
         {!hasMore && (

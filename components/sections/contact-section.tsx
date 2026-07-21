@@ -24,7 +24,7 @@ export default function ContactSection() {
     const parsed = schema.safeParse(form);
     if (!parsed.success) {
       const next: Partial<FormData> = {};
-      parsed.error.errors.forEach((error) => { if (error.path[0]) next[error.path[0] as keyof FormData] = error.message; });
+      parsed.error.issues.forEach((error) => { if (error.path[0]) next[error.path[0] as keyof FormData] = error.message; });
       setErrors(next); return;
     }
     setStatus("loading");

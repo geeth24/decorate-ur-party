@@ -1,6 +1,6 @@
 "use client"
 import { useState } from "react"
-import { motion, AnimatePresence } from "framer-motion"
+import { motion, AnimatePresence } from "motion/react"
 import { CldImage } from "next-cloudinary"
 import { Button } from "@/components/ui/button"
 import { X, ChevronLeft, ChevronRight } from "lucide-react"
