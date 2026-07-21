@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from "motion/react"
 import { CldImage } from "next-cloudinary"
 import { Button } from "@/components/ui/button"
 import { X, ChevronLeft, ChevronRight } from "lucide-react"
-import { GalleryImage } from "@/lib/gallery-data"
+import { CLOUDINARY_CLOUD_NAME, GalleryImage } from "@/lib/gallery-data"
 
 interface GalleryModalProps {
   images: GalleryImage[]
@@ -84,6 +84,7 @@ export default function GalleryModal({ images, currentIndex, isOpen, onClose, on
               onClick={(e) => e.stopPropagation()}
             >
               <CldImage
+                config={{ cloud: { cloudName: CLOUDINARY_CLOUD_NAME } }}
                 src={images[currentIndex]?.src || ''}
                 alt={images[currentIndex]?.alt || ''}
                 width={1200}

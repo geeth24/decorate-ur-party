@@ -3,7 +3,7 @@ import { useState, useEffect, useCallback, useRef } from "react"
 import { motion } from "motion/react"
 import { CldImage } from "next-cloudinary"
 import { Button } from "@/components/ui/button"
-import { generateGalleryImages, type GalleryImage } from "@/lib/gallery-data"
+import { CLOUDINARY_CLOUD_NAME, generateGalleryImages, type GalleryImage } from "@/lib/gallery-data"
 import GalleryModal from "@/components/gallery-modal"
 import { ArrowLeft } from "lucide-react"
 import Link from "next/link"
@@ -96,6 +96,7 @@ export default function GalleryPage() {
               onClick={() => handleImageClick(i)}
             >
               <CldImage
+                config={{ cloud: { cloudName: CLOUDINARY_CLOUD_NAME } }}
                 src={image.src}
                 alt={image.alt}
                 fill
